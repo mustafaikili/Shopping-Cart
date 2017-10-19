@@ -16,12 +16,17 @@ namespace ShoppingCart.WebMVC.UI.Controllers
         {
             _productService = productService;
         }
-        public IActionResult Index(int category = 0)
+        public IActionResult Index(int page = 1,int category = 0)
         {
+            int pageSize = 10;
             var products = _productService.GetList(category);
-            ProductListViewModel model = new ProductListViewModel {
-                Product = products.ToList(),
-                 CurrentCategory = category
+            ProductListViewModel model = new ProductListViewModel
+            {
+                Product = products.Skip((page-1)*pageSize).Take(pageSize).ToList(),
+                PageCount = (int)Math.Ceiling(products.Count / (double)pageSize),
+                PageSize = pageSize,
+                CurrentCategory = category,
+                CurrentPage = page
             };
             return View(model);
         }
