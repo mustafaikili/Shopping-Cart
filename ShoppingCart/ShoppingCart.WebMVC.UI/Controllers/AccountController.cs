@@ -58,5 +58,23 @@ namespace ShoppingCart.WebMVC.UI.Controllers
             }
             return View(registerViewModel);
         }
+        public ActionResult Login()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Login(LoginViewModel loginViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = _signInManager.PasswordSignInAsync(loginViewModel.UserName, loginViewModel.Password, loginViewModel.RememberMe, false).Result;
+                if (result.Succeeded)
+                    return RedirectToAction("Index", "Admin");
+                ModelState.AddModelError("", "Invalid login!");
+            }
+            return View(loginViewModel);
+        }
+
     }
 }
