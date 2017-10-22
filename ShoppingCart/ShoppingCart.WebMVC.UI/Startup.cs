@@ -13,6 +13,9 @@ using ShoppingCart.Business.Concrete;
 using Microsoft.AspNetCore.Http;
 using ShoppingCart.WebMVC.UI.Services.Abstract;
 using ShoppingCart.WebMVC.UI.Services.Concrete;
+using ShoppingCart.WebMVC.UI.Entities;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace ShoppingCart.WebMVC.UI
 {
@@ -38,6 +41,13 @@ namespace ShoppingCart.WebMVC.UI
 
             services.AddScoped<ICartService, CartService>();
             services.AddSingleton<ICartSummaryService, CartSummaryService>();
+
+            services.AddDbContext<CustomIdentityDbContext>
+                (options => options.UseSqlServer("Server=.;Database=NORTHWND;Integrated Security=true"));
+            services.AddIdentity<CustomIdentityUser, CustomIdentityRole>()
+                .AddEntityFrameworkStores<CustomIdentityDbContext>()
+                .AddDefaultTokenProviders();
+
             services.AddMvc();
             //session kullanabilmek için
             services.AddSession();
