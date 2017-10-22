@@ -1,0 +1,38 @@
+﻿@model ShoppingCart.WebMVC.UI.Models.ShippingDetailsViewModel
+@{
+    ViewData["Title"] = "Complete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Complete</h2>
+
+<form asp-controller="Cart" asp-action="Complete" method="post">
+    <div class="form-group">
+        <label asp-for="ShippingDetail.FirstName"></label>
+        <input asp-for="ShippingDetail.FirstName" class="form-control" placeholder="First Name" type="text"/>
+        <span asp-validation-for="ShippingDetail.FirstName"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="ShippingDetail.LastName"></label>
+        <input asp-for="ShippingDetail.LastName" class="form-control" placeholder="Last Name" type="text" />
+        <span asp-validation-for="ShippingDetail.LastName"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="ShippingDetail.EMail"></label>
+        <input asp-for="ShippingDetail.EMail" class="form-control" placeholder="E-Mail" type="text" />
+        <span asp-validation-for="ShippingDetail.EMail"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="ShippingDetail.City"></label>
+        <input asp-for="ShippingDetail.City" class="form-control" placeholder="City" type="text" />
+        <span asp-validation-for="ShippingDetail.City"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="ShippingDetail.Address"></label>
+        <input asp-for="ShippingDetail.Address" class="form-control" placeholder="Address" type="text" />
+        <span asp-validation-for="ShippingDetail.Address"></span>
+    </div>
+    <div>
+        <input type="submit" class="btn btn-sm btn-success" value="Complete Shopping" />
+    </div>
+</form>

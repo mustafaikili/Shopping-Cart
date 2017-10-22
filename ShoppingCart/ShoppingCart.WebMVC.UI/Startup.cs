@@ -10,6 +10,9 @@ using ShoppingCart.DataAccess.Abstract;
 using ShoppingCart.DataAccess.Concrete.EntityFramework.Entities;
 using ShoppingCart.Business.Abstract;
 using ShoppingCart.Business.Concrete;
+using Microsoft.AspNetCore.Http;
+using ShoppingCart.WebMVC.UI.Services.Abstract;
+using ShoppingCart.WebMVC.UI.Services.Concrete;
 
 namespace ShoppingCart.WebMVC.UI
 {
@@ -31,8 +34,13 @@ namespace ShoppingCart.WebMVC.UI
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<ICategoryDAL, EFCategoryDAL>();
 
-            services.AddMvc();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
+            services.AddScoped<ICartService, CartService>();
+            services.AddSingleton<ICartSummaryService, CartSummaryService>();
+            services.AddMvc();
+            //session kullanabilmek için
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,6 +57,8 @@ namespace ShoppingCart.WebMVC.UI
             }
 
             app.UseStaticFiles();
+            //session kullanımı ayarı
+            app.UseSession();
 
             app.UseMvc(routes =>
             {

@@ -14,6 +14,12 @@ namespace ShoppingCart.Business.Concrete
         {
             _productDAL = productDAL;
         }
+
+        public Product Get(int productId)
+        {
+            return _productDAL.Get(x => x.ProductId == productId);
+        }
+
         public ICollection<Product> GetList(int categoryID)
         {
             return categoryID ==0 

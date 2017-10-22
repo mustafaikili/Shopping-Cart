@@ -5,9 +5,9 @@ using System.Text;
 
 namespace ShoppingCart.Business.Abstract
 {
-    public interface IProductService
+    public interface ICartService
     {
-        Product Get(int productId);
-        ICollection<Product> GetList(int categoryID);
+        void AddToCart(Cart cart,Product product);
+        void RemoveFromCart(Cart cart,int productId);
     }
 }
