@@ -76,5 +76,11 @@ namespace ShoppingCart.WebMVC.UI.Controllers
             return View(loginViewModel);
         }
 
+        public ActionResult LogOff()
+        {
+            _signInManager.SignOutAsync().Wait();
+            return RedirectToAction("Login");
+        }
+
     }
 }

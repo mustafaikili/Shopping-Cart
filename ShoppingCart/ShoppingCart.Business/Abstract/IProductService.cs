@@ -9,5 +9,8 @@ namespace ShoppingCart.Business.Abstract
     {
         Product Get(int productId);
         ICollection<Product> GetList(int categoryID);
+        void Add(Product product);
+        void Update(Product product);
+        void Delete(Product product);
     }
 }

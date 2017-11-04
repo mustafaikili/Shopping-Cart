@@ -15,6 +15,16 @@ namespace ShoppingCart.Business.Concrete
             _productDAL = productDAL;
         }
 
+        public void Add(Product product)
+        {
+            _productDAL.Add(product);
+        }
+
+        public void Delete(Product product)
+        {
+            _productDAL.Delete(product);
+        }
+
         public Product Get(int productId)
         {
             return _productDAL.Get(x => x.ProductId == productId);
@@ -25,6 +35,11 @@ namespace ShoppingCart.Business.Concrete
             return categoryID ==0 
                 ?_productDAL.GetList()
                 :_productDAL.GetList(x => x.CategoryId == categoryID);
+        }
+
+        public void Update(Product product)
+        {
+            _productDAL.Update(product);
         }
     }
 }
